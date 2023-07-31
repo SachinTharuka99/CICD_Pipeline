@@ -28,6 +28,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class EOMInterestConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+    private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
+>>>>>>> Stashed changes
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
     StatusVarList statusList;
@@ -62,7 +69,11 @@ public class EOMInterestConnector extends ProcessBuilder {
 //                eomInterestService.EOMInterestCalculation(processBean, accountList.get(i));
 //            }
             accountList.forEach(account -> {
+<<<<<<< Updated upstream
                 eomInterestService.EOMInterestCalculation(processBean, account,Configurations.successCount,Configurations.failCount);
+=======
+                eomInterestService.EOMInterestCalculation(processBean, account,successCount,failCount);
+>>>>>>> Stashed changes
             });
 
 
@@ -80,7 +91,12 @@ public class EOMInterestConnector extends ProcessBuilder {
         summery.put("Process Name ", processBean.getProcessDes());
         summery.put("Started Date ", Configurations.EOD_DATE.toString());
         summery.put("No of Accounts effected ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Success Accounts ",Configurations.successCount.size());
         summery.put("No of fail Accounts ", Configurations.failCount.size());
+=======
+        summery.put("No of Success Accounts ",successCount.size());
+        summery.put("No of fail Accounts ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

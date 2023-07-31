@@ -44,6 +44,12 @@ public class TxnDropRequestConnector extends ProcessBuilder {
     StatusVarList statusList;
     @Autowired
     TxnDropRequestService txnDropRequestService;
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue <Integer>(capacity);
+>>>>>>> Stashed changes
 
     @Override
     public void concreteProcess() throws Exception {
@@ -76,7 +82,11 @@ public class TxnDropRequestConnector extends ProcessBuilder {
 //                    }
 
                     dropTransactionList.forEach(bean -> {
+<<<<<<< Updated upstream
                         txnDropRequestService.processTxnDropRequest(bean, processBean,Configurations.successCount,Configurations.failCount);
+=======
+                        txnDropRequestService.processTxnDropRequest(bean, processBean,successCount,failCount);
+>>>>>>> Stashed changes
                     });
 
                 }
@@ -129,8 +139,16 @@ public class TxnDropRequestConnector extends ProcessBuilder {
     public void addSummaries() {
         summery.put("Started Date ", Configurations.EOD_DATE.toString());
         summery.put("Total Number of Total Request ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Drop Requests ", Configurations.successCount.size());
         summery.put("No of Fail Requests ", Configurations.failCount.size());
+=======
+        summery.put("No of Drop Requests ", successCount.size());
+        summery.put("No of Fail Requests ", failCount.size());
+
+//        summery.put("No of Drop Requests ", Configurations.PROCESS_SUCCESS_COUNT);
+//        summery.put("No of Fail Requests ", Configurations.PROCESS_FAILD_COUNT);
+>>>>>>> Stashed changes
         summery.put("No of Fail Cards ", Configurations.FailedCards_TxnDropRequest);
 
 

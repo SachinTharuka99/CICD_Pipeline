@@ -44,6 +44,13 @@ public class LoyaltyPointsCalculationConnector extends ProcessBuilder {
 
     @Autowired
     LoyaltyPointsCalculationService loyaltyPointsCalculationService;
+<<<<<<< Updated upstream
+=======
+
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
 
@@ -72,7 +79,11 @@ public class LoyaltyPointsCalculationConnector extends ProcessBuilder {
 //                }
 
                 cardList.forEach(loyaltyBean -> {
+<<<<<<< Updated upstream
                     loyaltyPointsCalculationService.calculateLoyaltyPoints(loyaltyBean,Configurations.successCount,Configurations.failCount);
+=======
+                    loyaltyPointsCalculationService.calculateLoyaltyPoints(loyaltyBean,successCount,failCount);
+>>>>>>> Stashed changes
                 });
 
                 //wait till all the threads are completed

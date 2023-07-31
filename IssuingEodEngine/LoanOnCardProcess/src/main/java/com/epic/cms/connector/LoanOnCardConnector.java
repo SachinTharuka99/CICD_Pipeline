@@ -27,6 +27,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class LoanOnCardConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
@@ -68,7 +75,11 @@ public class LoanOnCardConnector extends ProcessBuilder {
 //                }
 
                 txnList.forEach(installmentBean -> {
+<<<<<<< Updated upstream
                     loanOnCardService.startLOCProcess(installmentBean, processBean, Configurations.successCount,Configurations.failCount);
+=======
+                    loanOnCardService.startLOCProcess(installmentBean, processBean, successCount,failCount);
+>>>>>>> Stashed changes
                 });
 
                 //wait till all the threads are completed
@@ -96,7 +107,12 @@ public class LoanOnCardConnector extends ProcessBuilder {
     public void addSummaries() {
         summery.put("Started Date", Configurations.EOD_DATE.toString());
         summery.put("No of Card effected", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Success Card ",Configurations.successCount.size());
         summery.put("No of fail Card ",Configurations.failCount.size());
+=======
+        summery.put("No of Success Card ",successCount.size());
+        summery.put("No of fail Card ",failCount.size());
+>>>>>>> Stashed changes
     }
 }

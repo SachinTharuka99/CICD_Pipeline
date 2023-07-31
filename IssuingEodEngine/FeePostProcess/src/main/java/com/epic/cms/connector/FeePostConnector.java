@@ -33,6 +33,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class FeePostConnector extends ProcessBuilder {
+
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
@@ -72,7 +76,11 @@ public class FeePostConnector extends ProcessBuilder {
 //                    feePostService.proceedFeePost(bean);
 //                }
                 custAccList.forEach(bean -> {
+<<<<<<< Updated upstream
                     feePostService.proceedFeePost(bean,Configurations.successCount,Configurations.failCount);
+=======
+                    feePostService.proceedFeePost(bean,successCount,failCount);
+>>>>>>> Stashed changes
                 });
 
             } else {
@@ -112,7 +120,12 @@ public class FeePostConnector extends ProcessBuilder {
     @Override
     public void addSummaries() {
         summery.put("Number of accounts to fee post ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("Number of success fee post ", Configurations.successCount.size());
         summery.put("Number of failure fee post ", Configurations.failCount.size());
+=======
+        summery.put("Number of success fee post ", successCount.size());
+        summery.put("Number of failure fee post ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

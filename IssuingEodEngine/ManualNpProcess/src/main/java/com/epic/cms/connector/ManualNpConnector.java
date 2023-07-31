@@ -33,6 +33,14 @@ public class ManualNpConnector extends ProcessBuilder {
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     public List<ErrorCardBean> cardErrorList = new ArrayList<ErrorCardBean>();
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> successCountDe = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCountDe = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
 
     int manualNpTotalCount = 0;
     int manualNpSuccesssCount = 0;
@@ -77,7 +85,11 @@ public class ManualNpConnector extends ProcessBuilder {
                     arrList.add(new StringBuffer(temp[0]));
                     arrList.add(new StringBuffer(temp[1]));
                     arrList.add(new StringBuffer(temp[2]));
+<<<<<<< Updated upstream
                     manualNpService.manualNpClassification(arrList,Configurations.successCount,Configurations.failCount);
+=======
+                    manualNpService.manualNpClassification(arrList,successCount,failCount);
+>>>>>>> Stashed changes
 
                 }
 
@@ -119,7 +131,11 @@ public class ManualNpConnector extends ProcessBuilder {
                     arrList.add(new StringBuffer(value[0]));
                     arrList.add(new StringBuffer(value[1]));
                     arrList.add(new StringBuffer(value[2]));
+<<<<<<< Updated upstream
                     manualNpService.manualNpDeClassification(arrList, Configurations.successCountDe,Configurations.failCountDe);
+=======
+                    manualNpService.manualNpDeClassification(arrList, successCountDe,failCountDe);
+>>>>>>> Stashed changes
                 });
 
                 while (!(taskExecutor.getActiveCount() == 0)) {
@@ -154,6 +170,7 @@ public class ManualNpConnector extends ProcessBuilder {
     @Override
     public void addSummaries() {
         summery.put("Selected Account for manual NP", selectedaccounts);
+<<<<<<< Updated upstream
         summery.put("No of Success Accounts", Configurations.successCount.size());
         summery.put("No of Failed Accounts", Configurations.failCount.size());
         summery.put("Process Status for Manual NP", "Passed");
@@ -161,6 +178,15 @@ public class ManualNpConnector extends ProcessBuilder {
         summery.put("Selected Acc for manual NP De-classified ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
         summery.put("No of Success Accounts ",Configurations.successCountDe.size());
         summery.put("No of Failed Accounts ", Configurations.failCountDe.size());
+=======
+        summery.put("No of Success Accounts", successCount.size());
+        summery.put("No of Failed Accounts", failCount.size());
+        summery.put("Process Status for Manual NP", "Passed");
+
+        summery.put("Selected Acc for manual NP De-classified ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+        summery.put("No of Success Accounts ", successCountDe.size());
+        summery.put("No of Failed Accounts ", failCountDe.size());
+>>>>>>> Stashed changes
         summery.put("Process Status for Manual NP De-classified", "Passed");
     }
 }

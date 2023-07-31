@@ -26,6 +26,12 @@ import java.util.concurrent.BlockingQueue;
 
 @Service
 public class CashBackAlertConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
@@ -58,7 +64,11 @@ public class CashBackAlertConnector extends ProcessBuilder {
                 for (Map.Entry<String, ArrayList<CashBackAlertBean>> entry : confirmAccountlist.entrySet()) {
                     Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS += entry.getValue().size();
 
+<<<<<<< Updated upstream
                     cashBackAlertService.processCashBackAlertService(entry.getKey(), entry.getValue(), processBean,Configurations.successCount,Configurations.failCount);
+=======
+                    cashBackAlertService.processCashBackAlertService(entry.getKey(), entry.getValue(), processBean,successCount,failCount);
+>>>>>>> Stashed changes
                 }
 
                 while (!(taskExecutor.getActiveCount() == 0)) {
@@ -83,7 +93,12 @@ public class CashBackAlertConnector extends ProcessBuilder {
         summery.put("Process Name", processBean.getProcessDes());
         summery.put("Started Date", Configurations.EOD_DATE.toString());
         summery.put("No of Account effected", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Success Account ", Configurations.successCount.size());
         summery.put("No of fail Account ",Configurations.failCount.size());
+=======
+        summery.put("No of Success Account ", successCount.size());
+        summery.put("No of fail Account ",failCount.size());
+>>>>>>> Stashed changes
     }
 }

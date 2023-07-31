@@ -32,6 +32,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class EOMSupplementaryCardResetConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
@@ -72,7 +78,11 @@ public class EOMSupplementaryCardResetConnector extends ProcessBuilder {
 //                }
 
                 accList.forEach(acc -> {
+<<<<<<< Updated upstream
                     eomSupplementaryCardResetService.SupplementryResetThread(acc,Configurations.successCount,Configurations.failCount);
+=======
+                    eomSupplementaryCardResetService.SupplementryResetThread(acc,successCount,failCount);
+>>>>>>> Stashed changes
                 });
 
                 /**wait till all the threads are completed*/
@@ -102,7 +112,12 @@ public class EOMSupplementaryCardResetConnector extends ProcessBuilder {
     @Override
     public void addSummaries() {
         summery.put("Number of accounts to supplementry card reset ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("Number of success card reset ", Configurations.successCount.size());
         summery.put("Number of failure supplementry card ", Configurations.failCount.size());
+=======
+        summery.put("Number of success card reset ", successCount.size());
+        summery.put("Number of failure supplementry card ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

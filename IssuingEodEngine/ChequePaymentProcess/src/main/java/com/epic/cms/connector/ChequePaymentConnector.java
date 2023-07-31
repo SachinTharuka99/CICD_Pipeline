@@ -24,6 +24,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ChequePaymentConnector extends ProcessBuilder {
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
 
@@ -68,7 +71,11 @@ public class ChequePaymentConnector extends ProcessBuilder {
 //                        chequePaymentService.processChequePayment(bean);
 //                    }
                     chqList.forEach(bean->  {
+<<<<<<< Updated upstream
                         chequePaymentService.processChequePayment(bean,Configurations.successCount,Configurations.failCount);
+=======
+                        chequePaymentService.processChequePayment(bean,successCount,failCount);
+>>>>>>> Stashed changes
                     });
 
                 }
@@ -104,7 +111,12 @@ public class ChequePaymentConnector extends ProcessBuilder {
 //        summery.put("No of fail Cheque Payments ", Configurations.PROCESS_FAILD_COUNT);
 
         summery.put("Cheque Payments Processed",  Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS + "");
+<<<<<<< Updated upstream
         summery.put("No of Success Cheque Payments",  Configurations.successCount.size() + "");
         summery.put("No of fail Cheque Payments ", Configurations.failCount.size());
+=======
+        summery.put("No of Success Cheque Payments",  successCount.size() + "");
+        summery.put("No of fail Cheque Payments ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

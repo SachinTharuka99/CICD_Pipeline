@@ -23,6 +23,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class CheckPaymentForMinimumAmountConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
@@ -50,18 +56,34 @@ public class CheckPaymentForMinimumAmountConnector extends ProcessBuilder {
             Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS = cardList.size();
             summery.put("Checking cards for min payment", cardList.size() + "");
 
+<<<<<<< Updated upstream
             for (LastStatementSummeryBean lastStatement : cardList) {
                 checkPaymentForMinimumAmountService.CheckPaymentForMinimumAmount(lastStatement,Configurations.successCount, Configurations.failCount);
             }
 //            cardList.forEach(lastStatement-> {
 //                checkPaymentForMinimumAmountService.CheckPaymentForMinimumAmount(lastStatement,Configurations.successCount, Configurations.failCount);
 //            });
+=======
+//            for (LastStatementSummeryBean lastStatement : cardList) {
+//                checkPaymentForMinimumAmountService.CheckPaymentForMinimumAmount(lastStatement);
+//            }
+            cardList.forEach(lastStatement-> {
+                checkPaymentForMinimumAmountService.CheckPaymentForMinimumAmount(lastStatement,successCount, failCount);
+            });
+>>>>>>> Stashed changes
 
 
             //wait till all the threads are completed
             while (!(taskExecutor.getActiveCount() == 0)) {
                 Thread.sleep(1000);
             }
+<<<<<<< Updated upstream
+=======
+
+            Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS = cardList.size();
+            Configurations.PROCESS_SUCCESS_COUNT = successCount.size();
+
+>>>>>>> Stashed changes
         } catch (Exception e) {
             Configurations.IS_PROCESS_COMPLETELY_FAILED = true;
             logError.error("Check Payment For Minimum Amount process ended with", e);

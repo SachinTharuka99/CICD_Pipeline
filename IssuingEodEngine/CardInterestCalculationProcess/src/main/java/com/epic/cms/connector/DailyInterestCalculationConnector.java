@@ -33,6 +33,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class DailyInterestCalculationConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logError = LoggerFactory.getLogger("logError");
     @Autowired
     CommonRepo commonRepo;
@@ -66,7 +72,11 @@ public class DailyInterestCalculationConnector extends ProcessBuilder {
 
                 if (accountList.size() > 0) {
                     accountList.forEach(statementBean -> {
+<<<<<<< Updated upstream
                         interestCalculationService.startDailyInterestCalculation(statementBean, Configurations.successCount,Configurations.failCount);
+=======
+                        interestCalculationService.startDailyInterestCalculation(statementBean, successCount,failCount);
+>>>>>>> Stashed changes
                     });
                 }
 
@@ -93,8 +103,13 @@ public class DailyInterestCalculationConnector extends ProcessBuilder {
     public void addSummaries() {
         summery.put("Started Date ", Configurations.EOD_DATE.toString());
         summery.put("No of Card effected ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Success Card ", Configurations.successCount.size());
         summery.put("No of fail Card ", Configurations.failCount.size());
+=======
+        summery.put("No of Success Card ", successCount.size());
+        summery.put("No of fail Card ", failCount.size());
+>>>>>>> Stashed changes
 
     }
 }

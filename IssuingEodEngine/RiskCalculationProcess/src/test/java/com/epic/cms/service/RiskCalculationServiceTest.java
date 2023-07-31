@@ -141,7 +141,11 @@ class RiskCalculationServiceTest {
 
 
         // Run the test
+<<<<<<< Updated upstream
         riskCalculationServiceUnderTest.riskCalculationProcess(delinquentAccountBean, 0, processBean, Configurations.successCount,Configurations.failCount);
+=======
+        riskCalculationServiceUnderTest.riskCalculationProcess(delinquentAccountBean, 0, processBean, successCount,failCount);
+>>>>>>> Stashed changes
 
         // Verify the results
         verify(riskCalculationServiceUnderTest.riskCalculationDao,times(1)).isManualNp(any());

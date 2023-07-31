@@ -24,6 +24,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class TxnMismatchPostConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue <Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
 
@@ -70,7 +76,11 @@ public class TxnMismatchPostConnector extends ProcessBuilder {
                 Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS += txnList.size();
                 int iterator = 1;
 
+<<<<<<< Updated upstream
                 txnMismatchPostService.processTxnMismatch(txnList, bean, iterator,Configurations.successCount,Configurations.failCount);
+=======
+                txnMismatchPostService.processTxnMismatch(txnList, bean, iterator,successCount,failCount);
+>>>>>>> Stashed changes
                 });
             //wait till all the threads are completed
             while (!(taskExecutor.getActiveCount() == 0)) {
@@ -112,7 +122,12 @@ public class TxnMismatchPostConnector extends ProcessBuilder {
     @Override
     public void addSummaries() {
         summery.put("Number of accounts to fee post ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("Number of success fee post ", Configurations.successCount.size());
         summery.put("Number of failure fee post ", Configurations.failCount.size());
+=======
+        summery.put("Number of success fee post ", successCount.size());
+        summery.put("Number of failure fee post ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

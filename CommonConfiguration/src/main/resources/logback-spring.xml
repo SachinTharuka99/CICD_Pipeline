@@ -45,14 +45,24 @@
         </appender>
 
         <!--write info logs to eod_info file-->
+<<<<<<< Updated upstream
         <logger name="logInfo" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE"/>
+=======
+        <logger name="logInfo" level="INFO" additivity="true">
+<!--            <appender-ref ref="CONSOLE"/>-->
+>>>>>>> Stashed changes
             <appender-ref ref="FILE_ROLLING_INFO"/>
         </logger>
 
         <!--write error logs to eod_error file-->
+<<<<<<< Updated upstream
         <logger name="logError" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE"/>
+=======
+        <logger name="logError" level="INFO" additivity="true">
+<!--            <appender-ref ref="CONSOLE"/>-->
+>>>>>>> Stashed changes
             <appender-ref ref="FILE_ROLLING_ERROR"/>
         </logger>
 

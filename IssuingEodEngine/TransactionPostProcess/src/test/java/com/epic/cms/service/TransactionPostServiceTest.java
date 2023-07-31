@@ -82,7 +82,11 @@ class TransactionPostServiceTest {
         when(transactionPostServiceUnderTest.transactionPostDao.updateEODTRANSACTION(any(String.class))).thenReturn(1);
 
         // Run the test
+<<<<<<< Updated upstream
         transactionPostServiceUnderTest.transactionList(bean, Configurations.successCount, Configurations.failCount);
+=======
+        transactionPostServiceUnderTest.transactionList(bean, successCount, failCount);
+>>>>>>> Stashed changes
 
         // Verify the results
         verify(transactionPostServiceUnderTest.transactionPostDao,times(1)).getTxnAmount(any());

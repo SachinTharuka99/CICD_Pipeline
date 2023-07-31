@@ -38,6 +38,12 @@ public class CardExpireConnector extends ProcessBuilder {
     LogManager logManager;
 
     private static final Logger logError = LoggerFactory.getLogger("logError");
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private ArrayList<CardBean> expiredCardList = new ArrayList<>();
 
 
@@ -56,7 +62,11 @@ public class CardExpireConnector extends ProcessBuilder {
                 Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS = expiredCardList.size();
 
                 expiredCardList.forEach(cardBean -> {
+<<<<<<< Updated upstream
                     cardExpireService.processCardExpire(cardBean,Configurations.successCount,Configurations.failCount);
+=======
+                    cardExpireService.processCardExpire(cardBean,successCount,failCount);
+>>>>>>> Stashed changes
                 });
                 //wait till all the threads are completed
                 while (!(taskExecutor.getActiveCount() == 0)) {
@@ -86,7 +96,12 @@ public class CardExpireConnector extends ProcessBuilder {
     @Override
     public void addSummaries() {
         summery.put("Number of cards to expired ", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("Number of success expired ", Configurations.successCount.size());
         summery.put("Number of failure expired ", Configurations.failCount.size());
+=======
+        summery.put("Number of success expired ", successCount.size());
+        summery.put("Number of failure expired ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

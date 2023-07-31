@@ -26,6 +26,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class IncrementLimitExpireConnector extends ProcessBuilder {
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue<Integer>(capacity);
+>>>>>>> Stashed changes
     private static final Logger logInfo = LoggerFactory.getLogger("logInfo");
     private static final Logger logError = LoggerFactory.getLogger("logError");
     public int configProcess = Configurations.PROCESS_ID_INCREMENT_LIMIT_EXPIRE;
@@ -64,7 +70,11 @@ public class IncrementLimitExpireConnector extends ProcessBuilder {
 //                }
 
                 cardList.forEach(limitIncrementBean -> {
+<<<<<<< Updated upstream
                     incrementLimitExpireService.processCreditLimitExpire(limitIncrementBean, processBean, configProcess, processHeader, Configurations.successCount, Configurations.failCount);
+=======
+                    incrementLimitExpireService.processCreditLimitExpire(limitIncrementBean, processBean, configProcess, processHeader, successCount, failCount);
+>>>>>>> Stashed changes
                 });
 
 
@@ -109,7 +119,12 @@ public class IncrementLimitExpireConnector extends ProcessBuilder {
     public void addSummaries() {
         summery.put("Started Date", Configurations.EOD_DATE.toString());
         summery.put("No of Card effected", Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS);
+<<<<<<< Updated upstream
         summery.put("No of Success Card ", Configurations.successCount.size());
         summery.put("No of fail Card ",Configurations.failCount.size());
+=======
+        summery.put("No of Success Card ", successCount.size());
+        summery.put("No of fail Card ",failCount.size());
+>>>>>>> Stashed changes
     }
 }

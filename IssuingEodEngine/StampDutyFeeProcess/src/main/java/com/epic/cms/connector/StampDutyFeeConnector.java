@@ -38,6 +38,12 @@ public class StampDutyFeeConnector extends ProcessBuilder {
     @Autowired
     @Qualifier("ThreadPool_100")
     ThreadPoolTaskExecutor taskExecutor;
+<<<<<<< Updated upstream
+=======
+    int capacity = 200000;
+    BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
+    BlockingQueue<Integer> failCount = new ArrayBlockingQueue <Integer>(capacity);
+>>>>>>> Stashed changes
 
     @Override
     public void concreteProcess() throws Exception {
@@ -62,7 +68,11 @@ public class StampDutyFeeConnector extends ProcessBuilder {
 //            }
 
             statementAccountList.forEach(stampDutyAcoountBean -> {
+<<<<<<< Updated upstream
                 stampDutyFeeService.StampDutyFee(stampDutyAcoountBean,Configurations.successCount,Configurations.failCount);
+=======
+                stampDutyFeeService.StampDutyFee(stampDutyAcoountBean,successCount,failCount);
+>>>>>>> Stashed changes
             });
 
 
@@ -95,7 +105,12 @@ public class StampDutyFeeConnector extends ProcessBuilder {
     public void addSummaries() {
         summery.put("Started Date", Configurations.EOD_DATE.toString());
         summery.put("No of Card effected", Integer.toString(Configurations.PROCESS_TOTAL_NOOF_TRABSACTIONS));
+<<<<<<< Updated upstream
         summery.put("No of Success Card ", Configurations.successCount.size());
         summery.put("No of fail Card ", Configurations.failCount.size());
+=======
+        summery.put("No of Success Card ", successCount.size());
+        summery.put("No of fail Card ", failCount.size());
+>>>>>>> Stashed changes
     }
 }

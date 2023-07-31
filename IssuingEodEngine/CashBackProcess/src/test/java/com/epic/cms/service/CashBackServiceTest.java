@@ -77,7 +77,11 @@ class CashBackServiceTest {
         when(cashBackServiceUnderTest.cashBackRepo.updateTotalCBAmount("accountNumber")).thenReturn(0);
 
         // Run the test
+<<<<<<< Updated upstream
         cashBackServiceUnderTest.cashBack(cashbackBean,Configurations.successCount,Configurations.failCount);
+=======
+        cashBackServiceUnderTest.cashBack(cashbackBean,successCount,failCount);
+>>>>>>> Stashed changes
 
         // Verify the results
 

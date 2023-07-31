@@ -21,6 +21,10 @@ class TxnMismatchPostServiceTest {
 
     private TxnMismatchPostService txnMismatchPostServiceUnderTest;
 
+<<<<<<< Updated upstream
+=======
+  //  public AtomicInteger faileCardCount = new AtomicInteger(0);
+>>>>>>> Stashed changes
   int capacity = 200000;
     BlockingQueue<Integer> successCount = new ArrayBlockingQueue<Integer>(capacity);
     BlockingQueue<Integer> failCount = new ArrayBlockingQueue <Integer>(capacity);
@@ -76,7 +80,11 @@ class TxnMismatchPostServiceTest {
                 .thenReturn(new StringBuffer("4380433458012"));
 
         // Run the test
+<<<<<<< Updated upstream
         txnMismatchPostServiceUnderTest.processTxnMismatch(txnList, bean, 0, Configurations.successCount, Configurations.failCount);
+=======
+        txnMismatchPostServiceUnderTest.processTxnMismatch(txnList, bean, 0, successCount, failCount);
+>>>>>>> Stashed changes
 
         // Verify the results
         verify(txnMismatchPostServiceUnderTest.commonRepo, times(1)).updateCardOtb(any(OtbBean.class));
